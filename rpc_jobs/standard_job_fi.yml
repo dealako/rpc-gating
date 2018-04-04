@@ -1,6 +1,7 @@
 - job-template:
     name: 'FI_{repo_name}-{branch}'
     branch: "master"
+    SHA: "{branch}"
     jira_project_key: ""
     project-type: pipeline
     concurrent: false
@@ -75,7 +76,7 @@
                 common.clone_with_pr_refs(
                   "${{env.WORKSPACE}}/${{env.RE_JOB_REPO_NAME}}",
                   env.REPO_URL,
-                  env.BRANCH,
+                  SHA,
                 )
               }} // stage
 
