@@ -15,6 +15,13 @@
           URL: "https://github.com/rcbops/rpc-openstack"
           BRANCH: "newton"
           JIRA_PROJECT_KEY: "RO"
+      - rpc-product-1:
+          URL: "https://github.com/mattt416/rpc-product-1"
+          BRANCH: "master"
+          JIRA_PROJECT_KEY: "SAN"
+          COMPONENT_DEPENDENCY_UPDATE: "true"
+          THIRD_PARTY_DEPENDENCY_UPDATE: "false"
+          RPC_GATING_BRANCH: "RE-1384/master/0"
     trigger:
       - PR:
           CRON: ""
@@ -33,6 +40,8 @@
     JIRA_ISSUE_TYPE: Task
     NUM_TO_KEEP: 30
     READ_ONLY_TEST: true
+    COMPONENT_DEPENDENCY_UPDATE: "false"
+    THIRD_PARTY_DEPENDENCY_UPDATE: "true"
     name: 'Dep-Update_{repo}-{BRANCH}-{trigger}'
     project-type: pipeline
     pipeline-scm:

@@ -4,7 +4,7 @@
 # Create pr if required
 # Run post hook
 run_hook(){
-  if [[ -x "$1" ]]
+  if [[ ${THIRD_PARTY_DEPENDENCY_UPDATE} == "true" ]] && [[ -x "$1" ]]
   then
     $1 || {
       echo "Hook script failed: $1"
@@ -19,6 +19,17 @@ run_hook(){
   fi
 }
 cd ${WORKSPACE}/repo
+
+start_sha=$(git rev-parse --verify HEAD)
+
+if [[ "${COMPONENT_DEPENDENCIES_UPDATE}" == 'true' ]]; then
+  pip install 'git+https://github.com/mattt416/rpc-metadata@RE-1371/master/0#rpc_component&subdirectory=rpc_component'
+  component dependency update-requirements
+  if [[ ${start_sha} == $(git rev-parse --verify HEAD) ]]; then
+    echo "No component dependency updates found."
+  fi
+fi
+
 run_hook "gating/update_dependencies/pre"
 run_hook "gating/update_dependencies/run"
 
@@ -62,7 +73,9 @@ else
   pr_branch="${issue}_${BRANCH}_dep_update"
   title="${issue} Update ${BRANCH} dependencies"
   git commit -a -m "${title}" -m "${message}"
+fi
 
+if [[ ${start_sha} != $(git rev-parse --verify HEAD) ]]; then
   echo "Pushing changes to repo branch"
   git push -f "$ssh_url" "HEAD:${pr_branch}"
 
@@ -77,7 +90,9 @@ else
       --source-branch "${pr_branch}"\
       --target-branch "${BRANCH}" \
       --title "${title}" \
-      --body "${message}"
+      --body "Automated dependency update pull request, see individual commits for details."
+else
+  echo "No pull request created, update scripts did discover any dependency changes."
 fi
 
 run_hook "gating/update_dependencies/post"
