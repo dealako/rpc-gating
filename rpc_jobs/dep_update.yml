@@ -93,3 +93,9 @@
           name: "READ_ONLY_TEST"
           description: Execute the job without submitting changes
           default: "{READ_ONLY_TEST}"
+      - string:
+          name: "COMPONENT_DEPENDENCY_UPDATE"
+          default: "{COMPONENT_DEPENDENCY_UPDATE}"
+      - string:
+          name: "THIRD_PARTY_DEPENDENCY_UPDATE"
+          default: "{THIRD_PARTY_DEPENDENCY_UPDATE}"
