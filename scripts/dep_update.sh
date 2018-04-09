@@ -23,6 +23,7 @@ cd ${WORKSPACE}/repo
 start_sha=$(git rev-parse --verify HEAD)
 
 if [[ "${COMPONENT_DEPENDENCIES_UPDATE}" == 'true' ]]; then
+  apt-get install -y python3-pip
   pip3 install 'git+https://github.com/mattt416/rpc-metadata#rpc_component&subdirectory=rpc_component'
   component dependency update-requirements
   if [[ ${start_sha} == $(git rev-parse --verify HEAD) ]]; then
