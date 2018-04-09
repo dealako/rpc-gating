@@ -19,8 +19,8 @@
           URL: "https://github.com/mattt416/rpc-product-1"
           BRANCH: "master"
           JIRA_PROJECT_KEY: "SAN"
-          COMPONENT_DEPENDENCY_UPDATE: "true"
-          THIRD_PARTY_DEPENDENCY_UPDATE: "false"
+          COMPONENT_DEPENDENCIES_UPDATE: "true"
+          THIRD_PARTY_DEPENDENCIES_UPDATE: "false"
           RPC_GATING_BRANCH: "RE-1384/master/0"
     trigger:
       - PR:
@@ -40,8 +40,8 @@
     JIRA_ISSUE_TYPE: Task
     NUM_TO_KEEP: 30
     READ_ONLY_TEST: true
-    COMPONENT_DEPENDENCY_UPDATE: "false"
-    THIRD_PARTY_DEPENDENCY_UPDATE: "true"
+    COMPONENT_DEPENDENCIES_UPDATE: "false"
+    THIRD_PARTY_DEPENDENCIES_UPDATE: "true"
     name: 'Dep-Update_{repo}-{BRANCH}-{trigger}'
     project-type: pipeline
     pipeline-scm:
@@ -94,8 +94,8 @@
           description: Execute the job without submitting changes
           default: "{READ_ONLY_TEST}"
       - string:
-          name: "COMPONENT_DEPENDENCY_UPDATE"
-          default: "{COMPONENT_DEPENDENCY_UPDATE}"
+          name: "COMPONENT_DEPENDENCIES_UPDATE"
+          default: "{COMPONENT_DEPENDENCIES_UPDATE}"
       - string:
-          name: "THIRD_PARTY_DEPENDENCY_UPDATE"
-          default: "{THIRD_PARTY_DEPENDENCY_UPDATE}"
+          name: "THIRD_PARTY_DEPENDENCIES_UPDATE"
+          default: "{THIRD_PARTY_DEPENDENCIES_UPDATE}"

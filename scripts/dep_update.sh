@@ -4,7 +4,7 @@
 # Create pr if required
 # Run post hook
 run_hook(){
-  if [[ ${THIRD_PARTY_DEPENDENCY_UPDATE} == "true" ]] && [[ -x "$1" ]]
+  if [[ ${THIRD_PARTY_DEPENDENCIES_UPDATE} == "true" ]] && [[ -x "$1" ]]
   then
     $1 || {
       echo "Hook script failed: $1"
