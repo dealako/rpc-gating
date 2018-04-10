@@ -4,17 +4,20 @@
 # Create pr if required
 # Run post hook
 run_hook(){
-  if [[ ${THIRD_PARTY_DEPENDENCIES_UPDATE} == "true" ]] && [[ -x "$1" ]]
+  if [[ ${THIRD_PARTY_DEPENDENCIES_UPDATE} == "true" ]]
   then
-    $1 || {
-      echo "Hook script failed: $1"
-      exit 1
-    }
-  else
-    if [[ "$1" =~ .*/run ]]
+    if [[ -x "$1" ]]
     then
-      echo "Run hook $1 not found."
-      exit 1
+      $1 || {
+        echo "Hook script failed: $1"
+        exit 1
+      }
+    else
+      if [[ "$1" =~ .*/run ]]
+      then
+        echo "Run hook $1 not found."
+        exit 1
+      fi
     fi
   fi
 }
