@@ -127,6 +127,19 @@ providers:
         availability-zones: []
         labels: *provider_pools_main_labels_block
 
+  - name: phobos-nodepool
+    region-name: "RegionOne"
+    cloud: phobos_nodepool
+    boot-timeout: 120
+    hostname-format: nodepool-{label.name}-{provider.name}-{node.id}
+    image-name-format: nodepool-phobos-{image_name}-{timestamp}
+    diskimages: *provider_diskimage_block
+    pools:
+      - name: main
+        max-servers: 20
+        availability-zones: []
+        labels: *provider_pools_main_labels_block
+
 diskimages:
   - name: ubuntu-xenial
     # Build fresh images every 24 hrs.
